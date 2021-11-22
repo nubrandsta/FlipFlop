@@ -1,0 +1,69 @@
+
+        #Body{
+            background-color: #000000;
+            opacity: 1;
+            background-image:  radial-gradient(#2eff7d 2px, transparent 2px), radial-gradient(#2eff7d 2px, #000000 2px);
+            background-size: 80px 80px;
+            background-position: 0 0,40px 40px;
+        }   
+        #main-content{
+            margin:auto;
+            margin-top:5%;
+            background-color:#29e470;
+            color:#29e470;
+        }
+        #main-content-body{
+            background-color: #212529;
+            color:white;
+        }
+        #main-content-title{
+            text-align:center;
+        }
+        #main-content-text{
+            text-align:center;
+        }
+        #content-1{
+            margin:auto;
+            margin-top:1%;
+            background-color:#212529;
+        }
+        #pdfs{
+            width:20%;
+            height:30%;
+            
+        }
+        #navbarTop{
+            display:grid;
+            text-align:center;
+            background-color: #212529;
+             opacity: 1;
+            background-size: 50px 50px;
+            background-image:  repeating-linear-gradient(0deg, #2eff7d, #2eff7d 2px, #212529 10px, #212529);
+        }
+        #mainbrand{
+            width:10%;
+            height:10%;
+            margin:0 auto;
+            padding:0%;
+            
+        }
+        #navbarBottom{
+            background-color:#212529 !important;
+        }
+        #currentPage{
+            color:#212529 !important;
+            padding-left:5%;
+        }
+        #links{
+            color:#29e470 !important;
+            padding-right:5%;   
+            text-decoration:none;
+            font-weight: bold;
+        }
+        #footerBottom{
+            position:absolute;
+            bottom:0;
+            width:100%;
+            height:60px;
+        }
+   
