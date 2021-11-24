@@ -95,7 +95,7 @@ $conn = mysqli_connect("localhost","root","","db_flop");
     position:fixed !important;
     bottom:0;
     width:100%;
-    margin-top:5%;
+    
 }
     </style>
 
