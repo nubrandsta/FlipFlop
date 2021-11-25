@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $conn = mysqli_connect("localhost","root","","db_flop");
 ?>
 
@@ -32,6 +33,19 @@ $conn = mysqli_connect("localhost","root","","db_flop");
         font-size:80%;
         float:right;
     }
+    #comment-form{
+        margin:auto;
+        
+    }
+    
+    #comment-field{
+        width:50%;
+        margin-top:2%;
+    }
+    #btn-submit{
+        margin-top:1%;
+    }
+    
 </style>    
 
 </head>
@@ -39,7 +53,7 @@ $conn = mysqli_connect("localhost","root","","db_flop");
 
 <body>
     <?php 
-    echo file_get_contents("html/header.php");
+    include "html/header.php";
 
     $title = $_GET['title'];
     $post_query = mysqli_query($conn, "SELECT post_title,post_desc,post_content,poster,post_date FROM tb_post");
@@ -60,17 +74,25 @@ $conn = mysqli_connect("localhost","root","","db_flop");
         <h5 class="card-text">Komentar<h5>
         <ul class="list-group list-group-flush">
             <?php while($comment_data = mysqli_fetch_assoc($comment_query)){
-                echo '<li class="list-group-item" id="comments">
-                <p id="commenter">'.$comment_data["username"].'</p>
-                <span id="comment">'.$comment_data["comment"] .'</span><span id="commentDate">'. $comment_data["comment_date"].'</span>
-                </li><hr>';
-                
+                echo '<hr><li class="list-group-item" id="comments">
+                <p id="commenter">-'.$comment_data["username"].' </p>
+                <span id="comment">"'.$comment_data["comment"] .'"</span><span id="commentDate">'. $comment_data["comment_date"].'</span>
+                </li>';
             }
             ?>
         </ul>
+        <form>
+            <div class="form-group" id="comment-form">
+            <hr>
+                <label for="new-comment">Tulis Komentar</label>
+               
+                <input type="text" class="form-control" id="comment-field">
+            </div>
+            <button type="submit" class="btn btn-primary" id="btn-submit">Submit sebagai <?php echo $user; ?></button>
+        </form>
     </div>
   </div>
-    
+<br><br><br>
 <?php
     echo file_get_contents("html/footer.php");
     ?>

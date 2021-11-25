@@ -1,4 +1,5 @@
 <?php
+session_start();
 $conn = mysqli_connect("localhost","root","","db_flop");
 
 ?>
@@ -88,6 +89,7 @@ $conn = mysqli_connect("localhost","root","","db_flop");
 #links{
     color:#29e470 !important;
     padding-right:5%;   
+    padding-left:5%;
     text-decoration:none;
     font-weight: bold;
 }
@@ -104,7 +106,7 @@ $conn = mysqli_connect("localhost","root","","db_flop");
 </head>
 <body>
 <?php
-echo file_get_contents("html/header.php");
+include "html/header.php";
 
 $query = mysqli_query($conn,"SELECT post_title,post_desc,poster,post_date FROM tb_post;");
 while($data=mysqli_fetch_assoc($query)){
@@ -127,7 +129,7 @@ while($data=mysqli_fetch_assoc($query)){
     
 }
 echo "<br><br><br><br>";
-echo file_get_contents("html/footer.php");
+include "html/footer.php" ;
 ?>
 
 </body>
