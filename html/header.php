@@ -67,7 +67,7 @@ else{
         </span>
         <span class="navbar-brand mb-2 h2" id="links">
           <ul class= "list-group list-group-horizontal" id="login-btn">
-        <li class="list-group-item bg-transparent"><a href="#" id="user-log">Logged: <?php echo $user ; ?> </a></li>
+        <li class="list-group-item bg-transparent"><a href="#" id="user-log"> <?php echo $user ; ?> </a></li>
         <li class="list-group-item bg-transparent" id="<?php echo $prompt;?>"><a href="/<?php echo $prompt; ?>.php" id="<?php echo $prompt;?>"> <?php echo $prompt;?></a></li>
           </ul>
         </span>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['username'] = "user";
+$_SESSION['username'] = "poster";
 $user = $_SESSION['username'];
 echo "login as ".$user;
 

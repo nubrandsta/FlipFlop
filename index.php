@@ -1,7 +1,25 @@
 <?php
 session_start();
 $conn = mysqli_connect("localhost","root","","db_flop");
+if($_SESSION){
+    $user = $_SESSION['username'];
+    $prompt = "logout";
+    $islogged = true;
+  }
+  else{
+    $user = "guest";
+    $prompt = "login";
+    $islogged = false;
+  }
 
+if($islogged == true){
+    $greet = '<a class="card-text" id="content-greet">Selamat datang '.$user.'</a>
+        <a class="btn btn-primary" id="new-content-link" href="post.php" >
+        Tulis post</a>';
+}
+else{
+    $greet = '<a class="card-text" id="content-greet">Anda belum login, login agar dapat menulis dan berkomentar</a>';
+}
 ?>
 
 
@@ -16,89 +34,96 @@ $conn = mysqli_connect("localhost","root","","db_flop");
     <link href="/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <style>
-        #Body{
-    background-color: #000000;
-    opacity: 1;
-    background-image:  radial-gradient(#2eff7d 2px, transparent 2px), radial-gradient(#2eff7d 2px, #000000 2px);
-    background-size: 80px 80px;
-    background-position: 0 0,40px 40px;
-}   
-#main-content{
-    margin:auto;
-    margin-top:1%;
-    margin-bottom:1%;
-    width:85%;
-    background-color:#29e470;
-    color:#29e470;
-}
-#main-content-body{
-    background-color: #212529;
-    color:white;
-}
-#main-content-title{
-    text-align:center;
-}
-#main-content-info{
-    text-align:right;
-    color:#212529;
-    margin-right:5%;
-    font-family:monospace;
+<style>
+                #Body{
+            background-color: #000000;
+            opacity: 1;
+            background-image:  radial-gradient(#2eff7d 2px, transparent 2px), radial-gradient(#2eff7d 2px, #000000 2px);
+            background-size: 80px 80px;
+            background-position: 0 0,40px 40px;
+        }   
+        #main-content{
+            margin:auto;
+            margin-top:1%;
+            margin-bottom:1%;
+            width:85%;
+            background-color:#29e470;
+            color:#29e470;
+        }
+        #main-content-body{
+            background-color: #212529;
+            color:white;
+        }
+        #main-content-title{
+            text-align:center;
+        }
+        #main-content-info{
+            text-align:right;
+            color:#212529;
+            margin-right:5%;
+            font-family:monospace;
 
-}
-#main-content-text{
-    text-align:center !important;
-}
-#content-link{
-    color:white !important;
-    text-decoration: none;
-    text-align:center !important;
-}
-#content-1{
-    margin:auto;
-    margin-top:1%;
-    background-color:#212529;
-}
-#pdfs{
-    width:20%;
-    height:30%;
-    
-}
-#navbarTop{
-    display:grid;
-    text-align:center;
-    background-color: #212529;
-     opacity: 1;
-    background-size: 50px 50px;
-    background-image:  repeating-linear-gradient(0deg, #2eff7d, #2eff7d 2px, #212529 10px, #212529);
-}
-#mainbrand{
-    width:10%;
-    height:10%;
-    margin:0 auto;
-    padding:0%;
-    
-}
-#navbarBottom{
-    background-color:#212529 !important;
-}
-#currentPage{
-    color:#212529 !important;
-    padding-left:5%;
-}
-#links{
-    color:#29e470 !important;
-    padding-right:5%;   
-    padding-left:5%;
-    text-decoration:none;
-    font-weight: bold;
-}
-#footerBottom{
-    position:fixed !important;
-    bottom:0;
-    width:100%;
-    
-}
+        }
+        #main-content-text{
+            text-align:center !important;
+        }
+        #content-link{
+            color:white !important;
+            text-decoration: none;
+            text-align:center !important;
+            
+        }
+        #content-greet{
+            text-decoration:none;
+            color:white;
+            font-size:20px;
+            text-align: center;
+            padding-left:5%;
+            
+        }
+        #new-content-link{
+            float:right;
+        }
+        #pdfs{
+            width:20%;
+            height:30%;
+            
+        }
+        #navbarTop{
+            display:grid;
+            text-align:center;
+            background-color: #212529;
+            opacity: 1;
+            background-size: 50px 50px;
+            background-image:  repeating-linear-gradient(0deg, #2eff7d, #2eff7d 2px, #212529 10px, #212529);
+        }
+        #mainbrand{
+            width:10%;
+            height:10%;
+            margin:0 auto;
+            padding:0%;
+            
+        }
+        #navbarBottom{
+            background-color:#212529 !important;
+        }
+        #currentPage{
+            color:#212529 !important;
+            padding-left:5%;
+        }
+        #links{
+            color:#29e470 !important;
+            padding-right:5%;   
+            padding-left:5%;
+            text-decoration:none;
+            font-weight: bold;
+        }
+        #footerBottom{
+            position:fixed !important;
+            bottom:0;
+            width:100%;
+            
+        }
     </style>
 
 
@@ -107,7 +132,19 @@ $conn = mysqli_connect("localhost","root","","db_flop");
 <body>
 <?php
 include "html/header.php";
-
+echo
+    '<div class="card " id="main-content" style="width:50%;margin-top:1%;">
+    <a id="main-content-info"></a>
+    <div class="card-body" id="main-content-body">
+    '.$greet.'
+    
+    
+      
+      <p class="card-text" id="main-content-text"></p>
+        <h5 class="card-text"></h5>
+    </div>
+  </div>' 
+    ;
 $query = mysqli_query($conn,"SELECT post_title,post_desc,poster,post_date FROM tb_post;");
 while($data=mysqli_fetch_assoc($query)){
     echo

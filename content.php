@@ -1,6 +1,56 @@
 <?php 
 session_start();
 $conn = mysqli_connect("localhost","root","","db_flop");
+$title = $_GET['title'];
+$post_query = mysqli_query($conn, "SELECT post_title,post_desc,post_content,poster,post_date FROM tb_post WHERE post_title ='$title'");
+$comment_query = mysqli_query($conn, "SELECT username,comment,comment_date FROM tb_comment WHERE post_title ='$title'");
+$post_data = mysqli_fetch_assoc($post_query);
+if($_SESSION){
+    $user = $_SESSION['username'];
+    $prompt = "logout";
+    $islogged = true;
+  }
+  else{
+    $user = "guest";
+    $prompt = "login";
+    $islogged = false;
+  }
+if($islogged == true){
+    $comment = '<form action="" method="POST">
+    <div class="form-group" id="comment-form">
+    <hr>
+        <label for="new-comment">Tulis Komentar</label>
+        <input type="text" name = "comment" class="form-control" id="comment-field" placeholder="Komentar anda">
+    </div>
+    <button type="submit" class="btn btn-primary" id="btn-submit">Submit sebagai '.$user.'</button>
+</form>';
+}
+else{
+    $comment = '<form action="login.php">
+    <div class="form-group" id="comment-form">
+    <hr>
+        <label for="new-comment">Tulis Komentar</label>
+        <input type="text" class="form-control" id="comment-field" disabled>
+    </div>
+    <button type="submit" class="btn btn-primary" id="btn-submit">login terlebih dahulu</button>
+</form>';
+}
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $error = "";
+    $content = htmlspecialchars($_POST["comment"]);
+    $date = date("Y/m/d");
+    if(empty($content)){
+        $error = "Empty comment!";
+    }
+    else{
+        $query_insert = mysqli_query($conn, "INSERT INTO tb_comment (post_title,username,comment,comment_date) VALUES ('$title','$user','$content','$date');");
+        $error ="working";
+        echo "<meta http-equiv='refresh' content='0'>";
+        echo $content .$user.$title.$date;
+    }
+    
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -54,11 +104,10 @@ $conn = mysqli_connect("localhost","root","","db_flop");
 <body>
     <?php 
     include "html/header.php";
+    
+   
 
-    $title = $_GET['title'];
-    $post_query = mysqli_query($conn, "SELECT post_title,post_desc,post_content,poster,post_date FROM tb_post");
-    $comment_query = mysqli_query($conn, "SELECT username,comment,comment_date FROM tb_comment WHERE post_title ='$title'");
-    $post_data = mysqli_fetch_assoc($post_query);
+   
     
     
     ?>
@@ -81,15 +130,7 @@ $conn = mysqli_connect("localhost","root","","db_flop");
             }
             ?>
         </ul>
-        <form>
-            <div class="form-group" id="comment-form">
-            <hr>
-                <label for="new-comment">Tulis Komentar</label>
-               
-                <input type="text" class="form-control" id="comment-field">
-            </div>
-            <button type="submit" class="btn btn-primary" id="btn-submit">Submit sebagai <?php echo $user; ?></button>
-        </form>
+        <?php echo $comment; ?>
     </div>
   </div>
 <br><br><br>
