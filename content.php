@@ -26,13 +26,13 @@ if($islogged == true){
 </form>';
 }
 else{
-    $comment = '<form action="login.php">
+    $comment = '<form action="login.php?action=login">
     <div class="form-group" id="comment-form">
     <hr>
         <label for="new-comment">Tulis Komentar</label>
         <input type="text" class="form-control" id="comment-field" disabled>
     </div>
-    <button type="submit" class="btn btn-primary" id="btn-submit">login terlebih dahulu</button>
+    <a class="btn btn-primary" id="btn-submit" href="login.php?action=login">login terlebih dahulu</a>
 </form>';
 }
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -104,12 +104,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <body>
     <?php 
     include "html/header.php";
-    
-   
-
-   
-    
-    
     ?>
 
     <div class="card " id="main-content" style="width:85%;margin-top:1%;">

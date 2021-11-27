@@ -14,7 +14,7 @@ if($_SESSION){
 
 if($islogged == true){
     $greet = '<a class="card-text" id="content-greet">Selamat datang '.$user.'</a>
-        <a class="btn btn-primary" id="new-content-link" href="post.php" >
+        <a class="btn btn-primary" id="new-content-link" href="post.php?action=Tulis" >
         Tulis post</a>';
 }
 else{
@@ -35,7 +35,7 @@ else{
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <style>
-                #Body{
+        #Body{
             background-color: #000000;
             opacity: 1;
             background-image:  radial-gradient(#2eff7d 2px, transparent 2px), radial-gradient(#2eff7d 2px, #000000 2px);
@@ -62,6 +62,14 @@ else{
             color:#212529;
             margin-right:5%;
             font-family:monospace;
+
+        }
+        #main-content-edit{
+            text-align:right;
+            text-decoration: none;
+            color:white;
+            margin-left:5%;
+            float:right;
 
         }
         #main-content-text{
@@ -147,8 +155,13 @@ echo
     ;
 $query = mysqli_query($conn,"SELECT post_title,post_desc,poster,post_date FROM tb_post;");
 while($data=mysqli_fetch_assoc($query)){
+    $action = '';
+    if($data['poster']==$user){
+        $action = '<a id="main-content-edit" href="post.php?action=Edit&title='.$data['post_title'].'">Edit</a>';
+    }
     echo
     '<div class="card " id="main-content" style="width:75%;margin-top:1%;">
+    
     <a id="main-content-info">diposting pada '.$data["post_date"].'</a>
     <div class="card-body" id="main-content-body">
     <a id="content-link" href="content.php?title='.$data["post_title"].'" >
@@ -159,7 +172,10 @@ while($data=mysqli_fetch_assoc($query)){
     </p>
         <h5 class="card-text">oleh 
             '.$data["poster"].'
+            '.$action.'
         </h5>
+        
+        
     </div>
   </div>' 
     ;
