@@ -3,8 +3,9 @@ session_start();
 $conn = mysqli_connect("localhost","root","","db_flop");
 $title = $_GET['title'];
 $post_query = mysqli_query($conn, "SELECT post_title,post_desc,post_content,poster,post_date FROM tb_post WHERE post_title ='$title'");
-$comment_query = mysqli_query($conn, "SELECT username,comment,comment_date FROM tb_comment WHERE post_title ='$title'");
+$comment_query = mysqli_query($conn, "SELECT id_comment,username,comment,comment_date FROM tb_comment WHERE post_title ='$title'");
 $post_data = mysqli_fetch_assoc($post_query);
+
 if($_SESSION){
     $user = $_SESSION['username'];
     $prompt = "logout";
@@ -119,8 +120,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <?php while($comment_data = mysqli_fetch_assoc($comment_query)){
                 echo '<hr><li class="list-group-item" id="comments">
                 <p id="commenter">-'.$comment_data["username"].' </p>
-                <span id="comment">"'.$comment_data["comment"] .'"</span><span id="commentDate">'. $comment_data["comment_date"].'</span>
-                </li>';
+                <span id="comment">"'.$comment_data["comment"] .'"</span><span id="commentDate">'. $comment_data["comment_date"].'</span>';
+                if($comment_data['username'] == $user){
+                    echo '<a href="comment.php?id='.$comment_data['id_comment'].'&action=Edit">Edit </a>';
+                }
+                echo '</li>';
             }
             ?>
         </ul>

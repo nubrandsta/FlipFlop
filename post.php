@@ -1,6 +1,9 @@
 <?php
 session_start();
 $conn = mysqli_connect("localhost","root","","db_flop");
+
+
+
 if($_SESSION){
     $user = $_SESSION['username'];
     $prompt = "logout";
@@ -12,10 +15,14 @@ if($_SESSION){
     $islogged = false;
   }
 if($_GET['action'] == 'Tulis'){
-    $isedit = false;
+    $action = "Tulis";
 }
 if($_GET['action'] == 'Edit'){
-    $isedit = true;
+    $action = "Edit";
+    $title = $_GET['title'];
+}
+if($_GET['action'] == 'Hapus'){
+    $action = "Hapus";
     $title = $_GET['title'];
 }
 $post_action = '<div class="card " id="main-content" style="width:85%;margin-top:1%;">
@@ -44,7 +51,7 @@ $post_action = '<div class="card " id="main-content" style="width:85%;margin-top
 $date = date('Y/m/d');
 $action = $_GET["action"];
 
-if($isedit == true){
+if($action == "Edit"){
     $get_query = mysqli_query($conn, "SELECT post_title, post_desc, post_content, poster, post_date FROM tb_post WHERE post_title = '$title';");
     $get_post = mysqli_fetch_assoc($get_query);
     if(empty($get_post)){
@@ -52,7 +59,7 @@ if($isedit == true){
     }
     else{
         if($get_post['poster'] != $user){
-            echo "invalid user ".$user;
+            header("location: index.php");
         }
         else{
             
@@ -73,7 +80,8 @@ if($isedit == true){
                 <textarea type="text" name = "post-content" class="form-control" id="post-post-field" placeholder="Isi post" rows=20>'.$get_post["post_content"].'</textarea>
             </div>
             <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
-            <a href="index.php" class="card-text" id="prompt-return">Back</a>
+            <a href="post.php?action=Hapus&title='.$title.'" class="btn btn-danger" id="prompt-delete">HAPUS POST</a>
+            
         </form>
                 
                 
@@ -83,7 +91,7 @@ if($isedit == true){
         }
     }
 }
-else{
+elseif($action == "Tulis"){
     $post_action = '<div class="card " id="main-content" style="width:85%;margin-top:1%;">
     <a id="main-content-info">'.$date.'</a>
     <div class="card-body" id="main-content-body">
@@ -101,10 +109,26 @@ else{
         <textarea type="text" name = "post-content" class="form-control" id="post-post-field" placeholder="Isi post" rows=20></textarea>
     </div>
     <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
-    <a href="index.php" class="card-text" id="prompt-return">Back</a>
+    
 </form>';
 }
-
+elseif($action == "Hapus"){
+    $get_query = mysqli_query($conn, "SELECT post_title, post_desc, post_content, poster, post_date FROM tb_post WHERE post_title = '$title';");
+    $get_post = mysqli_fetch_assoc($get_query);
+    if(empty($get_post)){
+        header("location: index.php");
+    }
+    else{
+        if($get_post['poster'] != $user){
+            header("location: index.php");
+        }
+        else{
+            $delete_comments = mysqli_query($conn, "DELETE FROM tb_comments WHERE post_title = '$title'");
+            $delete_post = mysqli_query($conn, "DELETE FROM tb_post WHERE post_title = '$title'");
+            header("location: index.php");
+        }
+    }
+}
 
 
 
@@ -141,6 +165,14 @@ else{
             font-weight:bold;
             
 
+        }
+        #prompt-delete{
+            text-decoration:none;
+            text-align:right;
+            float:right;
+            margin-right:1%;
+            font-weight:bold;
+            font-size:110%;
         }
     </style>
 </head>
