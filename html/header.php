@@ -1,5 +1,4 @@
 <?php
-
 if($_SESSION){
   $user = $_SESSION['username'];
   $link = "logout.php";
@@ -61,10 +60,10 @@ else{
       <nav class="navbar navbar-dark bg-dark py-0 " id="navbarBottom">
         <span class="navbar-brand mb-0 h1" id="currentPage">
             <ul class="list-group list-group-horizontal">
-                <li class="list-group-item bg-transparent"><a href="/index.php" id="links">Home</a></li>
-                <li class="list-group-item bg-transparent"><a href="/pdfs.html" id="links">PDFs</a></li>
-                <li class="list-group-item bg-transparent"><a href="/proyek.html" id="links">Proyek</a></li>
-                <li class="list-group-item bg-transparent"><a href="#" id="links">About</a></li>
+                <li class="list-group-item bg-transparent"><a href="/index.php" id="links">Forum</a></li>
+                <!-- <li class="list-group-item bg-transparent"><a href="/pdfs.html" id="links">PDF</a></li>
+                <li class="list-group-item bg-transparent"><a href="/proyek.html" id="links">Proyek</a></li> -->
+                <li class="list-group-item bg-transparent"><a href="../about.php" id="links">About</a></li>
             </ul>
         </span>
         <span class="navbar-brand mb-2 h2" id="links">

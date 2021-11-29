@@ -96,6 +96,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     #btn-submit{
         margin-top:1%;
     }
+    #btn-edit{
+        text-align:right;
+        float:right;
+        margin-right:5%;
+        text-decoration:none;
+        color:white;
+    }
     
 </style>    
 
@@ -122,7 +129,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <p id="commenter">-'.$comment_data["username"].' </p>
                 <span id="comment">"'.$comment_data["comment"] .'"</span><span id="commentDate">'. $comment_data["comment_date"].'</span>';
                 if($comment_data['username'] == $user){
-                    echo '<a href="comment.php?id='.$comment_data['id_comment'].'&action=Edit">Edit </a>';
+                    echo '<a href="comment.php?id='.$comment_data['id_comment'].'&action=Edit" id="btn-edit">Edit </a>';
                 }
                 echo '</li>';
             }
