@@ -85,8 +85,9 @@ else{
             text-decoration:none;
             color:white;
             font-size:20px;
-            text-align: center;
-            padding-left:5%;
+            text-align:justify !important;
+            margin:auto;
+            padding-left:7%;
             
         }
         #new-content-link{

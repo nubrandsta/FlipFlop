@@ -109,8 +109,9 @@ elseif($action == "Tulis"){
         <textarea type="text" name = "post-content" class="form-control" id="post-post-field" placeholder="Isi post" rows=20></textarea>
     </div>
     <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
-    
-</form>';
+    </form>
+    </div>
+    </div>';
 }
 elseif($action == "Hapus"){
     $get_query = mysqli_query($conn, "SELECT post_title, post_desc, post_content, poster, post_date FROM tb_post WHERE post_title = '$title';");
@@ -174,6 +175,7 @@ elseif($action == "Hapus"){
             font-weight:bold;
             font-size:110%;
         }
+        
     </style>
 </head>
 <body>

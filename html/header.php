@@ -60,9 +60,8 @@ else{
       <nav class="navbar navbar-dark bg-dark py-0 " id="navbarBottom">
         <span class="navbar-brand mb-0 h1" id="currentPage">
             <ul class="list-group list-group-horizontal">
-                <li class="list-group-item bg-transparent"><a href="/index.php" id="links">Forum</a></li>
-                <!-- <li class="list-group-item bg-transparent"><a href="/pdfs.html" id="links">PDF</a></li>
-                <li class="list-group-item bg-transparent"><a href="/proyek.html" id="links">Proyek</a></li> -->
+                <li class="list-group-item bg-transparent"><a href="../index.php" id="links">Forum</a></li>
+                <li class="list-group-item bg-transparent"><a href="../proyek.php" id="links">Proyek</a></li>
                 <li class="list-group-item bg-transparent"><a href="../about.php" id="links">About</a></li>
             </ul>
         </span>

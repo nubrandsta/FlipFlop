@@ -12,7 +12,7 @@ $error = 'Selamat Datang';
 
 $conn = mysqli_connect("localhost","root","","db_flop");
 if($action == "login"){
-    $forms_1 = '<div class="card " id="main-content" style="width:50%">
+    $forms_1 = '<div class="card " id="main-content" style="width:40%">
         <h3 class="card-title" id="main-content-title">LOG IN</h3>
             <div class="card-body" id="main-content-body">
                 <p class="card-text" id="main-content-text">';$forms_2='</p>
@@ -137,11 +137,11 @@ else{
             font-weight: bold;
         }
         #login-username{
-            width:75%;
+            width:90%;
             margin-left:5%;
         }
         #login-password{
-            width:75%;
+            width:90%;
             margin-left:5%;
         }
         #login-data{
@@ -182,10 +182,10 @@ else{
 <nav class="navbar navbar-dark bg-dark py-0 " id="navbarBottom">
     <span class="navbar-brand mb-0 h1" id="currentPage">
         <ul class="list-group list-group-horizontal">
-            <li class="list-group-item bg-transparent"><a href="/index.php" id="links">Home</a></li>
-            <li class="list-group-item bg-transparent"><a href="/pdfs.html" id="links">PDFs</a></li>
-            <li class="list-group-item bg-transparent"><a href="/proyek.html" id="links">Proyek</a></li>
-            <li class="list-group-item bg-transparent"><a href="#" id="links">About</a></li>
+            <li class="list-group-item bg-transparent"><a href="/index.php" id="links">Forum</a></li>
+            <!-- <li class="list-group-item bg-transparent"><a href="/pdfs.html" id="links">PDFs</a></li>
+            <li class="list-group-item bg-transparent"><a href="/proyek.html" id="links">Proyek</a></li> -->
+            <li class="list-group-item bg-transparent"><a href="a" id="links">About</a></li>
         </ul>
     </span>
 </nav>
