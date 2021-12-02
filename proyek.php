@@ -32,7 +32,7 @@ include("html/header.php");
 <div class="card " id="main-content" style="width:75%;margin-top:1%;">
     <a id="main-content-info">oleh Admin </a>
     <div class="card-body" id="main-content-body">
-    <a id="content-link" href="egarden.php?action=cek" >
+    <a id="content-link" href="egarden.php?action=view" >
       <h3 class="card-title" id="main-content-title">E-Garden</h3></a>
       
       <img src="egarden.png" class="img-fluid" alt="Responsive image" id="thumbnail-garden">

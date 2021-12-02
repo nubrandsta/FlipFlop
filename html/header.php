@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Jakarta");
 if($_SESSION){
   $user = $_SESSION['username'];
   $link = "logout.php";

@@ -38,7 +38,7 @@ $post_action = '<div class="card " id="main-content" style="width:85%;margin-top
     <input type="text" name = "post-title" class="form-control" id="post-title-field" placeholder="Judul postingan">
     <label for="post-desc-field">Deskripsi</label>
     <input type="text" name = "post-desc" class="form-control" id="post-desc-field" placeholder="Deskripsi">
-    <label for="post-post-field">Deskripsi</label>
+    <label for="post-post-field">Isi post</label>
     <textarea type="text" name = "post-content" class="form-control" id="post-post-field" placeholder="Isi post" rows=20></textarea>
 </div>
 <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
@@ -54,6 +54,7 @@ $action = $_GET["action"];
 if($action == "Edit"){
     $get_query = mysqli_query($conn, "SELECT post_title, post_desc, post_content, poster, post_date FROM tb_post WHERE post_title = '$title';");
     $get_post = mysqli_fetch_assoc($get_query);
+    $isedit= True;
     if(empty($get_post)){
         header("location: index.php");
     }
@@ -76,7 +77,7 @@ if($action == "Edit"){
                 <input type="text" name = "post-title" class="form-control" id="post-title-field" placeholder="Judul post"ingan value="'.$get_post["post_title"].'" disabled>
                 <label for="post-desc-field">Deskripsi</label>
                 <input type="text" name = "post-desc" class="form-control" id="post-desc-field" placeholder="Deskripsi" value = "'.$get_post["post_desc"].'">
-                <label for="post-post-field">Deskripsi</label>
+                <label for="post-post-field">Isi post</label>
                 <textarea type="text" name = "post-content" class="form-control" id="post-post-field" placeholder="Isi post" rows=20>'.$get_post["post_content"].'</textarea>
             </div>
             <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
@@ -105,7 +106,7 @@ elseif($action == "Tulis"){
         <input type="text" name = "post-title" class="form-control" id="post-title-field" placeholder="Judul postingan">
         <label for="post-desc-field">Deskripsi</label>
         <input type="text" name = "post-desc" class="form-control" id="post-desc-field" placeholder="Deskripsi" >
-        <label for="post-post-field">Deskripsi</label>
+        <label for="post-post-field">DIsi</label>
         <textarea type="text" name = "post-content" class="form-control" id="post-post-field" placeholder="Isi post" rows=20></textarea>
     </div>
     <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>

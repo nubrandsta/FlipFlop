@@ -2,7 +2,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);color:white;">
       © 2021 Copyright:
-      <a class="text-light" href="https://mdbootstrap.com/">Sukma Adhi Wijaya</a>
+      <a class="text-light" href="../about.php">Sukma Adhi Wijaya, Patar Manalu</a>
     </div>
     
     <!-- Copyright -->

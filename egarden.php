@@ -1,6 +1,7 @@
 <?php
 session_start();
 $conn = mysqli_connect("localhost","root","","db_flop");
+
 $getlast_query = mysqli_query($conn, "SELECT * FROM tb_egarden WHERE time = (SELECT MAX(time) FROM tb_egarden);");
 $getlast_data = mysqli_fetch_assoc($getlast_query);
 $temp = $getlast_data['temp'];
@@ -19,6 +20,51 @@ $lastupdate = $getlast_data['time'];
 $lastwater_query = mysqli_query($conn,"SELECT time FROM tb_egarden WHERE time = (SELECT MAX(time) FROM tb_egarden WHERE action='siram')");
 $lastwater_data = mysqli_fetch_assoc($lastwater_query);
 $lastwater = $lastwater_data['time'];
+
+$action = $_GET['action'];
+if(empty($action)){
+  header("location:egarden.php?action=view");
+}
+else{
+  if($action == "cek"){
+    $tempdata = rand(15,40);
+    $humiddata = rand(60,80);
+    $waterdata = rand(40,70);
+    $lastvent = $getlast_data['vent_status'];
+    $timenow = date("Y/m/d h:i:s");
+    $action = "Cek";
+    $newdata_query = mysqli_query($conn, "INSERT INTO tb_egarden (temp,humidity,water,vent_status,time,action) VALUES('$tempdata','$humiddata','$waterdata','$lastvent','$timenow','$action')");
+    header("location:egarden.php?action=view");
+  }
+  if($action == "toggle"){
+    $tempdata = rand(15,40);
+    $humiddata = rand(60,80);
+    $waterdata = rand(40,70);
+    $lastvent = $getlast_data['vent_status'];
+    if($lastvent == 1){
+      $lastvent = 0;
+    }
+    else{
+      $lastvent = 1;
+    }
+    $timenow = date("Y/m/d h:i:s");
+    $action = "Toggle Vent";
+    $newdata_query = mysqli_query($conn, "INSERT INTO tb_egarden (temp,humidity,water,vent_status,time,action) VALUES('$tempdata','$humiddata','$waterdata','$lastvent','$timenow','$action')");
+    header("location:egarden.php?action=view");
+  }
+  if($action == "siram"){
+    $tempdata = rand(15,40);
+    $humiddata = rand(60,80);
+    $waterdata = rand(40,70);
+    $lastvent = $getlast_data['vent_status'];
+    $timenow = date("Y/m/d h:i:s");
+    $action = "Siram";
+    $newdata_query = mysqli_query($conn, "INSERT INTO tb_egarden (temp,humidity,water,vent_status,time,action) VALUES('$tempdata','$humiddata','$waterdata','$lastvent','$timenow','$action')");
+    header("location:egarden.php?action=view");
+  }
+}
+
+
 
 
 
@@ -48,7 +94,8 @@ $lastwater = $lastwater_data['time'];
       } */
       #entry-info{
         
-        width:150%;
+        width:100%;
+        
         
         
       }
@@ -82,12 +129,38 @@ $lastwater = $lastwater_data['time'];
       }
       #button-cluster{
         margin-left:5%;
+        margin-right:5%;
         display:grid;
-        grid-template-columns: 33% 33% 33%;
+        grid-template-columns: 33% 33% 36%;
       }
       #button-cluster-element{
-        margin-left:2%;
+        margin-right:5%;
+        
       }
+      .btn-icon{
+       
+        width:10%;
+
+      }
+      #button-water{
+        width:5%;
+      }
+      #button-humidity{
+        width:5%;
+      }
+      #button-temp{
+        width:5%;
+      }
+      #button-vent{
+        width:20%;
+      }
+      #button-siram{
+        width:15%;
+      }
+      
+
+
+      
      
 
 
@@ -108,27 +181,30 @@ $lastwater = $lastwater_data['time'];
           </div>
           <div id="entry-info">
             <h3 id="main-content-text">Data Kebun</h3>
+          
             <hr>
         
         <?php 
-        echo '<h5 class="btn btn-success" id="koneksi">KONEKSI OK | Cek terakhir : '.$lastupdate.'</h5>';
+        echo '<h5 class="btn btn-success" id="koneksi">KONEKSI OK |---------| Cek terakhir : '.$lastupdate.'</h5>';
         echo '
-        <h5 id="label">Suhu</h5>
+        <h5 id="label"><img class="btn-icon" id="button-temp" src="thermometer.png">Suhu</h5>
         <div class="progress" id="bar">
           <div class="progress-bar" id="tempbar" role="progressbar" style="width: '.$temp_percent.'%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$temp.' C</div>
         </div>
-        <h5 id="label">Kelembapan Udara</h5>
+        <h5 id="label"><img class="btn-icon" id="button-humidity" src="hygrometer.png">  Kelembapan Udara</h5>
         <div class="progress" id="bar">
           <div class="progress-bar" role="progressbar" style="width: '.$humidity.'%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$humidity.' %</div>
         </div>
-        <h5 id="label">Kelembapan Tanah</h5>
+        <h5 id="label"><img class="btn-icon" id="button-water" src="alcohol.png">  Kelembapan Tanah</h5>
         <div class="progress" id="bar">
           <div class="progress-bar" role="progressbar" style="width: '.$water.'%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">'.$water.' %</div>
         </div>';
-        echo '<div id="status-div"><h5 id="label">Ventilasi : <button class="btn btn-primary" id="status">'.$vent_status.'</button></h5></div>';
-        echo '<div id="status-div"><h5 id="label">Terakhir kali disiram pada : <button class="btn btn-primary" id="status">'.$lastwater.'</button></h5></div>';
-        echo '<div id="button-cluster"><button class="btn btn-primary" id="button-cluster-element">Cek</button>
-              <button class="btn btn-primary" id="button-cluster-element">Cek</button>  
+        echo '<div id="status-div"><h5 id="label"><img class="btn-icon" id="button-water" src="vent.png">  Ventilasi : <button class="btn btn-primary" id="status">'.$vent_status.'</button></h5></div>';
+        echo '<div id="status-div"><h5 id="label"><img class="btn-icon" id="button-water" src="watering.png"> Terakhir kali disiram pada : <button class="btn btn-primary" id="status">'.$lastwater.'</button></h5></div>';
+        echo '<div id="button-cluster">
+              <a href="egarden.php?action=cek" class="btn btn-primary" id="button-cluster-element"><img class="btn-icon" id="button-refresh" src="refresh.png">  Cek</a>
+              <a href="egarden.php?action=toggle" class="btn btn-success" id="button-cluster-element"><img class="btn-icon" id="button-vent" src="vent.png">Ventilasi</a>  
+              <a href="egarden.php?action=siram" class="btn btn-info" id="button-cluster-element"><img class="btn-icon" id="button-siram" src="watering.png">  Siram</a>
               </div>';
         ?>
           </div>
