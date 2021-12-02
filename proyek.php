@@ -30,13 +30,13 @@ include("html/header.php");
 <body>
 
 <div class="card " id="main-content" style="width:75%;margin-top:1%;">
-    <a id="main-content-info">diposting pada </a>
+    <a id="main-content-info">oleh Admin </a>
     <div class="card-body" id="main-content-body">
-    <a id="content-link" href="" >
-      <h3 class="card-title" id="main-content-title">JUDUL</h3></a>
-      <p class="card-text" id="main-content-text">Isi text</p>
+    <a id="content-link" href="egarden.php?action=cek" >
+      <h3 class="card-title" id="main-content-title">E-Garden</h3></a>
+      
       <img src="egarden.png" class="img-fluid" alt="Responsive image" id="thumbnail-garden">
-        <h5 class="card-text">oleh </h5>
+        <h5 class="card-text" id="main-content-text">Sistem IoT untuk memantau kondisi lingkungan dan mengatur secara otomatis proses penyiraman dan regulasi suhu </h5>
     </div>
   </div>
   <br><br><br>
