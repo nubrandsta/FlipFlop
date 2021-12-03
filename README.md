@@ -12,6 +12,6 @@ Dibuat oleh :
 ### Cara instalasi
 1. Clone / download zip
 2. Copy isi ke xampp/htdocs
-3. Import database
+3. Import database (db_flop.sql)
 4. Jalankan Apache & MySQL di control panel XAMPP
 5. Buka localhost://
